@@ -21,6 +21,7 @@ while True:
     try:
         client_sock, client_addr = serv.accept()    
         client_sock_file = client_sock.makefile('rwb', 0)
+        client_sock.settimeout(3)
         line = client_sock_file.readline()
         print ("CLIENT ADDRESS : ",client_addr) 
         while True:
@@ -36,8 +37,7 @@ while True:
         cover = f.read()
         f.close()
     
-        client_sock.send(html % (cover) )
-        client_sock.close()        
+        client_sock.send(html % (cover) )              
     
     except KeyboardInterrupt:
         break
@@ -46,4 +46,5 @@ while True:
         print('ERROR!')
 
     finally:
+        client_sock.close() 
         time.sleep(0.1)
