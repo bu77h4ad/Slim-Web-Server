@@ -1,3 +1,4 @@
+#Создание заголовка для отправки браузеру
 def CreateHeader(code):
 	if code == 404:
 		code = b"404 Not Found"
@@ -12,17 +13,19 @@ def CreateHeader(code):
 
 # Функция для обработки запрашиваемой страницы
 def findFile(patch = "www\\", file=""):
-	indexPages = [
-        "index.pyhtml",
+	indexPages = [        
         "index.html",
-        "index.htm",
-        "default.pyhtml",
+        "index.htm",        
         "default.html",
         "default.htm"
     ]
-
+    # Удаляем лишнее из строки
 	file = file.strip("b'/")
-	#Ищет страницу по умолчанию
+	# Проверяем есть ли в строке переменные
+	if file.find("?") != -1:		
+		file = file[:file.find("?")]		
+
+	# Ищет страницу по умолчанию
 	if file == "":
 		for page in indexPages:	
 			try :	
@@ -42,7 +45,7 @@ def requestGet (patch ='', file = ''):
 	try:
 		f = open( patch+file,'rb')
 		a = f.read()
-		print (a)
+		#print (a)
 		f.close()
 		return CreateHeader(200), a
 	except :
