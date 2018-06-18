@@ -2,7 +2,7 @@ import socket
 import time
 from libSlimWebServ import *
 
-addr = socket.getaddrinfo('192.168.1.6', 80)[0][-1]
+addr = socket.getaddrinfo('192.168.1.194', 80)[0][-1]
 patch = "www\\"
  
 serversocket = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
