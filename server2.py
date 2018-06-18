@@ -1,8 +1,9 @@
 import socket
 import time
+from libServ import *
 
 addr = socket.getaddrinfo('192.168.1.194', 80)[0][-1]
-patch = b"www"
+patch = "www\\"
  
 serversocket = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
 serversocket.bind(addr)
@@ -21,7 +22,7 @@ while True:
     print ('------------------------------')
     print ("Request Data from Browser")
     print ('------------------------------')
-    print (data)    
+    #print (data)    
     
     data_split = data.split(b'\r\n')
     print(data_split )
@@ -30,21 +31,16 @@ while True:
     if (data == b'') or (data_split[-1] != b'' and data_split[-2] !=b''):
         conn.close()
         continue
+
+    method = data_split[0].split(b' ')[0]
+    file = str(data_split[0].split(b' ')[1])
     
-    file = data_split[0].split(b' ')[1]
-    
-    conn.send("HTTP/1.1 200 OK\r\n")    
-    conn.send("Server: MicroPython-WebServer\r\n")
-    conn.send("Content-Type: text/html; charset=UTF-8\r\n")
-    conn.send("\r\n")    
-    
-    try:
-        f = open(patch+file)
-        conn.send(f.read())
-        f.close()
-    except:
-        print("file not found", patch+file)
-         
+    print (method)
+    if method == b'GET':
+        header, body = requestGet (patch= patch, file = file)        
+        conn.send(header)
+        conn.send(body)
+
     
     conn.close()
     # Делаем задержку, чтобы цикл не сильно загружал процессор
