@@ -23,5 +23,5 @@ patch = "www\\"
 ```
 http://micropython.org/download#esp32
 
-<img align="left" width="50%" height="50%" src="cover.png">
-<img align="left" width="50%" height="50%" src="image.png">
+<img align="left" src="cover.png">
+<img align="left" src="image.png">
