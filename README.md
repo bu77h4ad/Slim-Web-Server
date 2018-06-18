@@ -10,11 +10,11 @@
 **Пример запуска для MicroPython 1.9.4**
  
 ```python
-import server2
+import slimWebServ
 ```
 **Пример запуска для Python 3.6**
 ```python
-python server2.py
+python slimWebServ.py
 ```
 **Настройка**
 ```python
