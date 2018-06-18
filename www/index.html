@@ -1,1 +1,35 @@
-index.html
+<html>
+<head>
+	<title>Пример JavaScript</title>
+	
+	<script type="text/javascript">
+	function $_GET(key) {
+    var p = window.location.search;
+    p = p.match(new RegExp(key + '=([^&=]+)'));
+    return p ? p[1] : false;
+	}
+	</script>
+</head>
+<body>
+<h1><a href="/" >index.html</a></h1>
+
+<script type="text/javascript">
+	document.write("<p>Значение переменной \'login\' = " , $_GET("login"),"</p>")
+	document.write("<p>Значение переменной \'pass\' = " , $_GET("pass"),"</p>")
+
+</script>
+
+<noscript>
+	Ваш браузер не поддерживает JavaScript или поддержка отключена в настройках.
+</noscript>
+
+
+
+<form action="/">
+   <p><input name="login"> <input type="password" name="pass"></p>
+   <p><input type="submit"></p>
+
+</body>
+</html>
+
+
