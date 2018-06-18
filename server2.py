@@ -1,6 +1,6 @@
 import socket
 import time
-from libServ import *
+from libWebServ import *
 
 addr = socket.getaddrinfo('192.168.1.194', 80)[0][-1]
 patch = "www\\"
