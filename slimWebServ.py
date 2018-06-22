@@ -2,7 +2,9 @@ import socket
 import time
 from libSlimWebServ import *
 
+#   Вешаем на текущий адрес машины на 80 порт, прослушку порта
 addr = socket.getaddrinfo('192.168.1.194', 80)[0][-1]
+#   Каталог - корень для веб сервера
 patch = "www\\"
  
 serversocket = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
@@ -27,21 +29,26 @@ while True:
     data_split = data.split(b'\r\n')
     print(data_split )
     
-    #Проверяем то что запрос на сервер адекватный
+    #   Проверяем то что запрос на сервер адекватный
     if (data == b'') or (data_split[-1] != b'' and data_split[-2] !=b''):
         conn.close()
         continue
-
+    #   Берем параметры с запроса клиента
     method = data_split[0].split(b' ')[0]
-    file = str(data_split[0].split(b' ')[1])
+    link = str(data_split[0].split(b' ')[1])    
     
-    print (method)
     if method == b'GET':
-        header, body = requestGet (patch= patch, file = file)        
-        conn.send(header)
-        conn.send(body)
-
-    
+        headerHtml, bodyHtml, varHtmlDict = requestGet (patch= patch, link = link)        
+        conn.send(headerHtml)   #   Отправляет браузеру заголовок
+        conn.send(bodyHtml)     #   Отправляет браузеру тело страницы
+        print (varHtmlDict)
+        if (varHtmlDict.get('login') == '1'):
+            print ("login = ", varHtmlDict.get('login') )
+        #   ...
+        #   ...
+        #   Можно добавить свои переменные 
+        #   You may add yours GET date
+        #
     conn.close()
-    # Делаем задержку, чтобы цикл не сильно загружал процессор
+    #   Делаем задержку, чтобы цикл не сильно загружал процессор
     time.sleep(0.1)
