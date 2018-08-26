@@ -3,7 +3,7 @@ import time
 from libSlimWebServ import *
 
 #   Вешаем на текущий адрес машины на 80 порт, прослушку порта
-addr = socket.getaddrinfo('192.168.1.194', 80)[0][-1]
+addr = socket.getaddrinfo('192.168.4.1', 80)[0][-1]
 #   Каталог - корень для веб сервера
 patch = "www\\"
  
