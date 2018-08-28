@@ -25,3 +25,6 @@ http://micropython.org/download#esp32
 
 <img align="left" src="cover.png">
 <img align="left" src="image.png">
+
+инструкция
+http://andreyapanasenko.ru/prostoy-web-server-na-python
